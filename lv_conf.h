@@ -106,7 +106,7 @@
  * - LV_OS_MQX
  * - LV_OS_SDL2
  * - LV_OS_CUSTOM */
-#define LV_USE_OS   LV_OS_NONE
+#define LV_USE_OS   LV_OS_PTHREAD
 
 #if LV_USE_OS == LV_OS_CUSTOM
     #define LV_OS_CUSTOM_INCLUDE <stdint.h>
@@ -153,7 +153,7 @@
 /** Stack size of drawing thread.
  * NOTE: If FreeType or ThorVG is enabled, it is recommended to set it to 32KB or more.
  */
-#define LV_DRAW_THREAD_STACK_SIZE    (8 * 1024)         /**< [bytes]*/
+#define LV_DRAW_THREAD_STACK_SIZE    (32 * 1024)         /**< [bytes]*/
 
 #define LV_USE_DRAW_SW 1
 #if LV_USE_DRAW_SW == 1
@@ -938,8 +938,8 @@
 #define LV_USE_TINY_TTF 1
 #if LV_USE_TINY_TTF
     /* Enable loading TTF data from files */
-    #define LV_TINY_TTF_FILE_SUPPORT 0
-    #define LV_TINY_TTF_CACHE_GLYPH_CNT 256
+    #define LV_TINY_TTF_FILE_SUPPORT 1
+    #define LV_TINY_TTF_CACHE_GLYPH_CNT 1024
 #endif
 
 /** Rlottie library */
