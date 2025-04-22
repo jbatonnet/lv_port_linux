@@ -11,9 +11,9 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wno-cast-qual -Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wformat-security \
 					-Wno-ignored-qualifiers -Wno-error=pedantic -Wno-sign-compare -Wno-error=missing-prototypes -Wdouble-promotion -Wclobbered -Wdeprecated -Wempty-body \
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
-CFLAGS 			?= -O3 -g0 -I$(LVGL_DIR)/ $(WARNINGS)
-LDFLAGS 		?= -lm -lstdc++
-BIN 			= main
+CFLAGS 			?= -O3 -g0 -fPIC -I$(LVGL_DIR)/ $(WARNINGS)
+LDFLAGS 		?= -lstdc++
+BIN 			= lvgl.so
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
 BUILD_BIN_DIR 	= $(BUILD_DIR)/bin
@@ -22,11 +22,11 @@ prefix 			?= /usr
 bindir 			?= $(prefix)/bin
 
 #Collect the files to compile
-MAINSRC          = ./main.c
+#MAINSRC          = ./main.c
 
 include $(LVGL_DIR)/lvgl/lvgl.mk
 
-CSRCS 			+=$(LVGL_DIR)/mouse_cursor_icon.c 
+#CSRCS 			+=$(LVGL_DIR)/mouse_cursor_icon.c 
 
 OBJEXT 			?= .o
 
@@ -62,7 +62,7 @@ $(BUILD_OBJ_DIR)/%.o: %.cpp lv_conf.h
 
 default: $(TARGET)
 	@mkdir -p $(dir $(BUILD_BIN_DIR)/)
-	$(CC) -o $(BUILD_BIN_DIR)/$(BIN) $(TARGET) $(LDFLAGS)
+	$(CC) -shared -o $(BUILD_BIN_DIR)/$(BIN) $(TARGET) $(LDFLAGS)
 
 clean: 
 	rm -rf $(BUILD_DIR)
