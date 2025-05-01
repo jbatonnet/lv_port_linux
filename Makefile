@@ -13,7 +13,7 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-Wshift-negative-value -Wstack-usage=2048 -Wno-unused-value -std=gnu99
 CFLAGS 			?= -O3 -g0 -fPIC -I$(LVGL_DIR)/ $(WARNINGS)
 LDFLAGS 		?= -lstdc++
-BIN 			= lvgl.so
+BIN 			= liblvgl.so
 BUILD_DIR 		= ./build
 BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
 BUILD_BIN_DIR 	= $(BUILD_DIR)/bin
